@@ -8,15 +8,17 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.*;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.context.annotation.Configuration;
+import static com.digitalinnovationone.heroesapi.constants.HeroesConstant.ENDPOINT_DYNAMO;
+import static com.digitalinnovationone.heroesapi.constants.HeroesConstant.REGION_DYNAMO;
 
 import java.util.Arrays;
 
 @Configuration
 @EnableDynamoDBRepositories
 public class HeroesTable {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         AmazonDynamoDB client = AmazonDynamoDBAsyncClientBuilder.standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration())
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(ENDPOINT_DYNAMO, REGION_DYNAMO))
                 .build();
 
         DynamoDB dynamoDB = new DynamoDB(client);
