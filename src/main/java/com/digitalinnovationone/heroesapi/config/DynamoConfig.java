@@ -24,15 +24,19 @@ public class DynamoConfig {
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
-        AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAWSCredentials());
+        AmazonDynamoDB amazonDynamoDB
+                = new AmazonDynamoDBClient(amazonAWSCredentials());
+
         if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
             amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
         }
+
         return amazonDynamoDB;
     }
 
     @Bean
     public AWSCredentials amazonAWSCredentials() {
-        return new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey);
+        return new BasicAWSCredentials(
+                amazonAWSAccessKey, amazonAWSSecretKey);
     }
 }
