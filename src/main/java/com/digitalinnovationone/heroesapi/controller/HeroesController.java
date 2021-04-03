@@ -16,9 +16,6 @@ import static com.digitalinnovationone.heroesapi.constants.HeroesConstant.HEROES
 @Slf4j
 public class HeroesController {
 
-    private static final org.slf4j.Logger log =
-            org.slf4j.LoggerFactory.getLogger(HeroesController.class);
-
     HeroesService heroesService;
     HeroesRepository heroesRepository;
 
@@ -33,7 +30,7 @@ public class HeroesController {
         return heroesService.findAll();
     }
 
-    @GetMapping(HEROES_ENDPOINT_LOCAL + "/id")
+    @GetMapping(HEROES_ENDPOINT_LOCAL + "/{id}")
     public Mono<ResponseEntity<Heroes>> findByIdHero(@PathVariable String id) {
         log.info("Requesting the hero with id {}", id);
         return heroesService.findByIdHero(id)
@@ -48,7 +45,7 @@ public class HeroesController {
         return heroesService.save(heroes);
     }
 
-    @DeleteMapping(HEROES_ENDPOINT_LOCAL + "/id")
+    @DeleteMapping(HEROES_ENDPOINT_LOCAL + "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Mono<HttpStatus> deleteByIdHeroe(@PathVariable String id) {
         log.info("deleting a hero with id {}", id);
